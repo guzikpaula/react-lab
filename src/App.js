@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
     const [email, setEmail] = useState('pguzik@student.agh.edu.pl');
+const [loggedIn, setLoggedIn] = useState(false);
 
     function handleChange(event) {
         setEmail(event.target.value);
@@ -17,12 +18,42 @@ function App() {
         message = <div>Twój adres e-mail jest stanowczo za długi.</div>;
     }
 
+    if (loggedIn) {
+        return (
+            <div>
+                <h1>Witaj w systemie do zapisów na zajęcia</h1>
+
+                <h2>Witaj {email}!</h2>
+
+                <button
+                    type="button"
+                    onClick={() => setLoggedIn(false)}
+                >
+                    Wyloguj
+                </button>
+            </div>
+        );
+    }
     return (
         <div>
-            <h1>System do zapisów na zajęcia</h1>
-            <h2>Twój e-mail to {email}.</h2>
+            <h1>Witaj w systemie do zapisów na zajęcia</h1>
+
+            <p>Zaloguj się e-mailem</p>
+
             {message}
-            <input type="text" value={email} onChange={handleChange}/>
+
+            <input
+                type="text"
+                value={email}
+                onChange={handleChange}
+            />
+
+            <button
+                type="button"
+                onClick={() => setLoggedIn(true)}
+            >
+                Wchodzę
+            </button>
         </div>
     );
 
