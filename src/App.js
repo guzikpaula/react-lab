@@ -2,36 +2,31 @@ import {useState} from "react";
 import './App.css';
 import LoginForm from "./LoginForm";
 import LoggedInForm from "./LoggedInForm";
+import MeetingsPage from "./meetings/MeetingsPage";
 import "milligram";
 
 function App() {
-    const [email, setEmail] = useState('pguzik@student.agh.edu.pl');
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    function login(userEmail) {
-        setEmail(userEmail);
-        setLoggedIn(true);
-    }
-
-    function logout() {
-        setLoggedIn(false);
-    }
+    const [loggedInUsername, setLoggedInUsername] = useState(null);
 
     //ternary: warunek ? wartość_jeśli_true : wartość_jeśli_false
 
     return (
-        <div>
+        <div className="container">
             <h1>Witaj w systemie do zapisów na zajęcia</h1>
 
             {
-                loggedIn
-                    ? <LoggedInForm
-                        email={email}
-                        onLogout={logout}
+                loggedInUsername
+                    ? <>
+                    <LoggedInForm
+                        email={loggedInUsername}
+                        onLogout={()=> setLoggedInUsername(null)}/>
+                    <MeetingsPage />
+                    </>
+                    :
+                    <LoginForm
+                        onLogin ={(email) => setLoggedInUsername(email)}
                     />
-                    : <LoginForm
-                        onLogin={login}
-                    />
+
             }
         </div>
     );
