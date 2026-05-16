@@ -1,5 +1,6 @@
 import {useState} from "react";
 import './App.css';
+import "milligram";
 
 function App() {
     const [email, setEmail] = useState('pguzik@student.agh.edu.pl');
